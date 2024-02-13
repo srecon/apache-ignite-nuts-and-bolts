@@ -4,7 +4,6 @@ services:
     image: apacheignite/ignite:2.14.0
     container_name: ignite-node-1
     restart: always
-    #command: sh -c "yarn install && yarn start"
     ports:
       - 8080:8080
       - 10800:10800
@@ -23,7 +22,6 @@ services:
     image: apacheignite/ignite:2.14.0
     container_name: ignite-node-2
     restart: always
-    #command: sh -c "yarn install && yarn start"
     ports:
       - 8081:8081
       - 10801:10801
@@ -32,6 +30,24 @@ services:
       - 11212:11212
     volumes:
       - /home/shamim/workspace/ignite/data/node-2:/storage
+      - /home/shamim/workspace/ignite/libs/:/opt/ignite/apache-ignite/libs/user_libs
+      - /home/shamim/workspace/ignite/examples/config/example-cache.xml:/config-file.xml
+    environment:
+      IGNITE_WORK_DIR: /storage
+      CONFIG_URI: /config-file.xml
+      OPTION_LIBS: ignite-rest-http
+  ignite-node-3:
+    image: apacheignite/ignite:2.14.0
+    container_name: ignite-node-3
+    restart: always
+    ports:
+      - 8082:8082
+      - 10802:10802
+      - 47102:47102
+      - 47502:47502
+      - 11213:11213
+    volumes:
+      - /home/shamim/workspace/ignite/data/node-3:/storage
       - /home/shamim/workspace/ignite/libs/:/opt/ignite/apache-ignite/libs/user_libs
       - /home/shamim/workspace/ignite/examples/config/example-cache.xml:/config-file.xml
     environment:
